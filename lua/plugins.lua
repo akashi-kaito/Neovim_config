@@ -14,6 +14,23 @@ return require('packer').startup(function(use)
     }
   }
   
+  -- ファイラープラグイン 
+  use {
+      "nvim-telescope/telescope-file-browser.nvim",
+      config = function()
+        require("telescope").setup{
+          extensions = {
+             file_browser = {
+               theme = "ivy",
+               -- disables netrw and use telescope-file-browser in its place
+               hijack_netrw = true,
+             },
+           },
+        }
+        require("telescope").load_extension "file_browser"
+      end,
+  }
+
   -- using bufferline
   use {'akinsho/bufferline.nvim', tag = "*",
   requires = 'nvim-tree/nvim-web-devicons',
