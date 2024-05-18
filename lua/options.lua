@@ -13,3 +13,4 @@ opt.fileencodings='utf-8','sjis','iso-2022-jp','euc-jp'
 opt.fileformats='dos','unix','mac' 
 opt.hidden=true        
 opt.termguicolors=true
+vim.opt.swapfile = false
