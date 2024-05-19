@@ -2,7 +2,12 @@ return {
   {
     'akinsho/bufferline.nvim',
     dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function(opts)
+    config = function(_)
+      require('nvim-treesitter.configs').setup({
+        auto_install = true,
+        highlight = { endable = true }
+
+      })
       local bufferline = require('bufferline')
       bufferline.setup{
         options = {
@@ -15,7 +20,7 @@ return {
   },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
-    dependencies = { 
+    dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
       "nvim-telescope/telescope-file-browser.nvim",

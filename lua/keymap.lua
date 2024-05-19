@@ -14,7 +14,7 @@ vim.cmd([[
 vim.api.nvim_set_keymap(
   'n',
   '<space>ff',
-  ":Telescope find_files<CR>",
+  ":Telescope find_files hidden=true<CR>",
   { noremap = true }
 )
 
@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local set = vim.keymap.set
     -- LSP共通の設定
     set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { buffer = true })
-    -- set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { buffer = true })
+    set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { buffer = true })
     set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { buffer = true })
     set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { buffer = true })
     set("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { buffer = true })
@@ -80,8 +80,7 @@ cmp.mapping = cmp.mapping.preset.insert({
   ['<C-l>'] = cmp.mapping.complete(),
   ["<C-d>"] = cmp.mapping.scroll_docs(-4),
   ["<C-f>"] = cmp.mapping.scroll_docs(4),
-  ["<C-Space>"] = cmp.mapping.complete(),
   ['<C-e>'] = cmp.mapping.close(),
-  ["<CR>"] = cmp.mapping.confirm { select = true },
+  ["<CR>"] = cmp.mapping.confirm { select = false },
 })
 
