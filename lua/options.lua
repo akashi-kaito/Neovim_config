@@ -13,4 +13,5 @@ opt.encoding='utf-8'
 opt.fileencodings='utf-8'
 opt.hidden=true
 opt.termguicolors=true
+opt.pumblend=10
 opt.swapfile = false

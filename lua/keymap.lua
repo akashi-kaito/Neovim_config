@@ -1,6 +1,6 @@
 vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-J>', ':bnext<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-K>', ':bprev<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-K>', ':bnext<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-J>', ':bprev<CR>', { noremap = true })
 
 -- 下半分にターミナルを開く
 vim.cmd([[
@@ -42,13 +42,13 @@ vim.api.nvim_set_keymap(
 
 -- LSP起動時のキーマップ
 vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(ctx)
+  callback = function(args)
     local set = vim.keymap.set
+    -- LSP共通の設定
     set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { buffer = true })
-    set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { buffer = true })
+    -- set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { buffer = true })
     set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { buffer = true })
     set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { buffer = true })
-    set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { buffer = true })
     set("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", { buffer = true })
     set("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", { buffer = true })
     set("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { buffer = true })
@@ -58,9 +58,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
     set("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", { buffer = true })
     set("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", { buffer = true })
     set("n", "<space>;f", "<cmd>lua vim.lsp.buf.formatting()<CR>", { buffer = true })
-  end,
-})
 
+    -- 言語ごとの設定
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    -- java
+    if client and 'jdtls' == client.name then
+
+      local bufopts = { noremap=true, silent=true, buffer = args.buf}
+      -- set("n", "<space>;i", [[<cmd>lua require('lspconfig').jdtls.organize_imports()<CR>]], bufopts)
+
+    end
+
+  end
+})
 
 -- 補完のキーマップ
 local cmp = require("cmp")
