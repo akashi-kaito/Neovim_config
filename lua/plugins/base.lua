@@ -34,6 +34,7 @@ return {
              hijack_netrw = true,
            },
          },
+         defaults = { file_ignore_patterns = { "node_modules", ".git" }},
       }
       require("telescope").load_extension "file_browser"
     end,
